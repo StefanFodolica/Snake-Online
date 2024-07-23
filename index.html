@@ -161,6 +161,9 @@
         align-items: center;
         text-align: center;
       }
+      #score-saved-button {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -179,6 +182,7 @@
           <button onclick="saveToLeaderboard()" id="save-score-button">
             Save Score
           </button>
+          <button id="score-saved-button">Score Saved</button>
         </div>
       </div>
       <div id="controls-page"></div>
@@ -246,6 +250,7 @@
         document.getElementById("save-score-button").style.display = "none";
         document.getElementById("end-message").style.display = "none";
         document.getElementById("nameInput").style.display = "none";
+        document.getElementById("score-saved-button").style.display = "none";
         resetGame();
         placeFood();
         gamePaused = false;
@@ -472,6 +477,8 @@
           }
           updateLeaderboard(playerName, gameScore, difficulty);
         }
+        document.getElementById("save-score-button").style.display = "none";
+        document.getElementById("score-saved-button").style.display = "flex";
       }
 
       function backToMain() {
