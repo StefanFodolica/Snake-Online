@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://stefanfodolica.github.io; connect-src 'self' https://fodo-snake-40bf65a523e4.herokuapp.com; script-src 'self' 'unsafe-inline';">
+    <meta charset="UTF-8" />
     <title>Snake Game</title>
     <style>
       body {
@@ -232,7 +232,7 @@
       let speedInterval;
       let maxSpeed;
       let updateInterval = 0;
-      const API_BASE_URL = 'https://fodo-snake-40bf65a523e4.herokuapp.com'; // Replace with your actual Heroku app URL
+      const API_BASE_URL = "https://your-heroku-app-name.herokuapp.com"; // Replace with your actual Heroku app URL
 
       function startGame(difficulty) {
         document.getElementById("game-screen").style.display = "flex";
@@ -281,7 +281,7 @@
         gameScore = 0;
         document.getElementById(
           "game-score"
-        ).innerHTML = Your Score: ${gameScore};
+        ).innerHTML = `Your Score: ${gameScore}`;
         snake = [{ x: 200, y: 200 }];
         direction = { x: 0, y: 0 };
         nextDirection = { x: 0, y: 0 };
@@ -290,16 +290,16 @@
         gameBoard.innerHTML = "";
         createSnake();
         boardSize = 400;
-        gameBoard.style.width = ${boardSize}px;
-        gameBoard.style.height = ${boardSize}px;
+        gameBoard.style.width = `${boardSize}px`;
+        gameBoard.style.height = `${boardSize}px`;
         document.getElementById("end-message").style.display = "none";
       }
 
       function createSnake() {
         snake.forEach((segment, index) => {
           const snakeElement = document.createElement("div");
-          snakeElement.style.left = ${segment.x}px;
-          snakeElement.style.top = ${segment.y}px;
+          snakeElement.style.left = `${segment.x}px`;
+          snakeElement.style.top = `${segment.y}px`;
           snakeElement.classList.add("snake");
           if (index === 0) {
             snakeElement.classList.add("snake-head");
@@ -314,8 +314,8 @@
           y: Math.floor(Math.random() * (boardSize / tileSize)) * tileSize,
         };
         const foodElement = document.createElement("div");
-        foodElement.style.left = ${food.x}px;
-        foodElement.style.top = ${food.y}px;
+        foodElement.style.left = `${food.x}px`;
+        foodElement.style.top = `${food.y}px`;
         foodElement.classList.add("food");
         gameBoard.appendChild(foodElement);
       }
@@ -341,7 +341,7 @@
           gameScore++;
           document.getElementById(
             "game-score"
-          ).innerHTML = Your Score: ${gameScore};
+          ).innerHTML = `Your Score: ${gameScore}`;
           placeFood();
           adjustSpeed();
           adjustBoard();
@@ -359,8 +359,8 @@
         if (gameScore % adjustmentInterval === 0) {
           boardSize += boardGrowth;
           boardSize = Math.min(maxSize, boardSize);
-          gameBoard.style.width = ${boardSize}px;
-          gameBoard.style.height = ${boardSize}px;
+          gameBoard.style.width = `${boardSize}px`;
+          gameBoard.style.height = `${boardSize}px`;
         }
       }
 
@@ -388,8 +388,8 @@
         gameBoard.innerHTML = "";
         createSnake();
         const foodElement = document.createElement("div");
-        foodElement.style.left = ${food.x}px;
-        foodElement.style.top = ${food.y}px;
+        foodElement.style.left = `${food.x}px`;
+        foodElement.style.top = `${food.y}px`;
         foodElement.classList.add("food");
         gameBoard.appendChild(foodElement);
       }
@@ -446,7 +446,7 @@
         });
 
       function updateLeaderboard(name, score, difficulty) {
-        fetch(${API_BASE_URL}/api/score, {
+        fetch(`${API_BASE_URL}/api/score`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -508,14 +508,14 @@
       }
 
       function loadLeaderboard(difficulty) {
-        fetch(${API_BASE_URL}/api/leaderboard/${difficulty})
+        fetch(`${API_BASE_URL}/api/leaderboard/${difficulty}`)
           .then((response) => response.json())
           .then((leaderboardItems) => {
             const leaderboard = document.getElementById("leaderboardList");
             leaderboard.innerHTML = "";
             leaderboardItems.forEach((item) => {
               const listItem = document.createElement("li");
-              listItem.innerText = ${item.name} - ${item.score};
+              listItem.innerText = `${item.name} - ${item.score}`;
               listItem.classList.add("leaderboard-item");
               leaderboard.appendChild(listItem);
             });
